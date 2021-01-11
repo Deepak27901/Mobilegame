@@ -16,8 +16,12 @@ import 'react-native-gesture-handler';
 import MainContainer from './components/MainContainer';
 import usersContainer from './components/usersContainer'
 import secondContainer from './components/secondContainer'
+//import SignUp from './components/SignUp'
 import {Provider} from 'react-redux'
 import store from './Redux/store'
+import SignUp from './screens/SignUp'
+import AniView from './components/AniView'
+
 
 const Stack = createStackNavigator();
 const App = () => {
@@ -44,6 +48,20 @@ const App = () => {
       
       name="secondContainer"
       component={secondContainer}
+      options={{headerShown: false}}
+     
+    />
+    <Stack.Screen
+      
+      name="SignUp"
+      component={SignUp}
+      options={{headerShown: false}}
+     
+    />
+     <Stack.Screen
+      
+      name="AniView"
+      component={AniView}
       options={{headerShown: false}}
      
     />

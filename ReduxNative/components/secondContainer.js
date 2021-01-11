@@ -6,14 +6,33 @@ import {
   TouchableOpacity,
   Image,
   TextInput,
+  KeyboardAvoidingView,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
+const loginOptions = [
+  {
+    image: require('../assets/Images/facebook.png'),
+    text: 'Sign in with Facebook',
+  },
+  {
+    image: require('../assets/Images/apple1.png'),
+    text: 'Sign in with Apple',
+  },
+  {
+    image: require('../assets/Images/google.png'),
+    text: 'Sign in with Google',
+  },
+];
 
-const secondContainer = () => {
+
+
+const secondContainer = (props) => {
   return (
-    <SafeAreaView style={styles.mainView}>
-      <ScrollView bounces={false} style={{}}>
+
+    <>
+    <KeyboardAvoidingView behavior="padding" style={styles.mainView}>
+      <ScrollView bounces={false} >
         <View style={styles.header}>
           <Text style={{fontSize: 36, fontFamily: 'Boogaloo'}}>GameApart</Text>
           <Text style={{fontSize: 15, marginVertical: 5, textAlign: 'center'}}>
@@ -21,8 +40,10 @@ const secondContainer = () => {
           </Text>
         </View>
 
-        <View style={{justifyContent: 'center', alignContent: 'center'}}>
-          <TouchableOpacity
+        <View style={{justifyContent: 'center', alignContent: 'center',}}>
+         {loginOptions.map((option)=>{
+return(
+        <TouchableOpacity
             style={{
               flexDirection: 'row',
               borderColor: 'black',
@@ -33,34 +54,20 @@ const secondContainer = () => {
               alignItems: 'center',
               // justifyContent: 'space-around',
               borderRadius: 8,
-              marginTop: 16,
+              marginVertical:8
+              
             }}>
             <Image
               style={{marginHorizontal: 20}}
-              source={require('../assets/Images/facebook.png')}
+              source={option.image}
             />
             <Text style={{fontSize: 20, marginHorizontal: 5}}>
-              Sign in with Facebook
+              {option.text}
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.touchableBox}>
-            <Image
-              style={{marginHorizontal: 20}}
-              source={require('../assets/Images/apple1.png')}
-            />
-            <Text style={{fontSize: 20, marginHorizontal: 5}}>
-              Sign in with Apple
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.touchableBox}>
-            <Image
-              style={{marginHorizontal: 20}}
-              source={require('../assets/Images/google.png')}
-            />
-            <Text style={{fontSize: 20, marginHorizontal: 5}}>
-              Sign in with Google
-            </Text>
-          </TouchableOpacity>
+          )
+             })}
+         
         </View>
 
         <View
@@ -98,28 +105,50 @@ const secondContainer = () => {
             style={styles.textCointainer}
             placeholder="Enter Your Password"
           />
-          <View style={{flexDirection:"row",justifyContent:"center"}}>
-             <TouchableOpacity>
-          <Text style={{alignSelf: 'center'}}>
-            Need an account? 
-          </Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-          <Text style={{color: 'red'}}>Sign up</Text>
-          </TouchableOpacity>
+          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+            <Text style={{alignSelf: 'center'}}>Need an account?</Text>
+
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('SignUp')}>
+              <Text style={{color: 'red'}}>Sign up</Text>
+            </TouchableOpacity>
           </View>
         </View>
+        
       </ScrollView>
-  <View style={{backgroundColor: 'rgb(205, 224, 236)',borderColor:'rgb(205, 224, 236)', borderWidth: 1, 
-  borderRadius: 10,alignItems:"center" ,height:80,marginTop:10,}}>
-      <TouchableOpacity style={{backgroundColor:'#94E864',width:'90%',alignItems:"center",height:40,justifyContent:"center",borderRadius:20}}>
-        <Text style={{fontSize: 22,fontWeight:"500"}}>GO</Text>
-        </TouchableOpacity>
-      <Text style={{fontSize:12, marginVertical:15}}>© 2020 GameApart. Copy and we'll hunt you down.</Text>
-      </View>
+      </KeyboardAvoidingView>
+     
+    
       
-
-    </SafeAreaView>
+      <View
+        style={{
+          backgroundColor: 'rgb(205, 224, 236)',
+          borderColor: 'rgb(205, 224, 236)',
+          borderWidth: 1,
+          
+          alignItems: 'center',
+          
+        
+        }}>
+        <TouchableOpacity
+          style={{
+            backgroundColor: '#94E864',
+            width: '90%',
+            alignItems: 'center',
+            height: 40,
+            justifyContent: 'center',
+            borderRadius: 20,
+          }}>
+          <Text style={{fontSize: 22, fontWeight: '500'}}>GO</Text>
+        </TouchableOpacity>
+        <Text style={{fontSize: 12, marginVertical: 15}}>
+          © 2020 GameApart. Copy and we'll hunt you down.
+        </Text>
+      </View>
+    
+    </>
+   
+  
   );
 };
 
@@ -133,11 +162,11 @@ const styles = StyleSheet.create({
   },
   header: {
     alignItems: 'center',
-    marginTop:20
+    marginTop: 20,
   },
   touchableBox: {
     flexDirection: 'row',
-    borderColor: 'black',
+    borderColor: 'black',                             
     backgroundColor: 'white',
     borderWidth: 2,
     marginHorizontal: 16,
@@ -145,7 +174,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
     borderRadius: 8,
-    marginTop: 8,
+  marginVertical:8
   },
 
   textCointainer: {

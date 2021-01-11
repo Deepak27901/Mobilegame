@@ -38,6 +38,9 @@ const MainContainer = (props) => {
         <TouchableOpacity style={{marginVertical:20}} onPress={()=>props.navigation.navigate("secondContainer")}>
           <Text>Go To Second Container</Text>
           </TouchableOpacity>
+          <TouchableOpacity style={{marginVertical:20}} onPress={()=>props.navigation.navigate("AniView")}>
+          <Text>Animated</Text>
+          </TouchableOpacity>
       </View>
     </View>
   );
